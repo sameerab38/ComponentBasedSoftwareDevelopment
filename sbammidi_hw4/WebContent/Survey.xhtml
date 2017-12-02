@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Sameera Bammidi -->
+<!-- This page displays a form to fill in the survey -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	 <!-- <h:outputStylesheet library="css" name="style.css" /> -->
+	 <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/style.css" />
+	<title>Student Survey Form</title>
+</h:head>
+<h:body>
+	<h:form id="myForm">
+		<p:panel id="surveyPanel" header="Survey Form">
+
+			<p:messages id="msgs" />
+
+			<p>Please fill in all the details and click on Submit</p>
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="firstName" value="First Name:" />
+				<p:inputText id="firstName" value="#{student.firstName}"
+					style="width:400px" required="true"
+					requiredMessage="You must enter your first name"
+					validatorMessage="Name should contain only alphabets and cannot exceed 15 characters">
+					<f:validateRegex pattern="[a-zA-Z]*" />
+					<f:validateLength minimum="1" maximum="15" />
+				</p:inputText>
+				<p:message for="firstName" styleClass="error-message"/>
+				<br />
+				<p:outputLabel for="lastName" value="Last Name:" />
+				<p:inputText value="#{student.lastName}" id="lastName"
+					style="width:400px" required="true"
+					requiredMessage="You must enter your last name"
+					validatorMessage="Name should contain only alphabets and cannot exceed 15 characters">
+					<f:validateRegex pattern="[a-zA-Z]*" />
+					<f:validateLength minimum="1" maximum="15" />
+				</p:inputText>
+				<p:message for="lastName" styleClass="error-message"/>
+				<br />
+				<p:outputLabel for="streetAddress" value="Street Address:" />
+				<p:inputText value="#{student.streetAddress}" id="streetAddress"
+					style="width:400px" required="true"
+					validatorMessage="Street address must not exceed 30 characters">
+					<f:validateRegex pattern="^[a-zA-Z0-9#\-\.,\s]*$" />
+					<f:validateLength minimum="1" maximum="30" />
+				</p:inputText>
+				<p:message for="streetAddress" styleClass="error-message"/>
+				<br />
+				
+				<p:outputLabel for="zip" value="Zip:" />
+				<p:inputText value="#{student.zip}" id="zip" style="width:400px"
+					required="true"
+					validatorMessage="Zipcode should have exactly five digits">
+					<f:ajax event="keyup" render="city state"/>
+					<f:validateRegex pattern="[0-9]*" />
+					<f:validateLength minimum="5" maximum="5" />
+				</p:inputText>
+				<p:message for="zip" styleClass="error-message"/>
+				<br />
+				<p:outputLabel for="city" value="City:" />
+				<p:inputText value="#{student.city}" id="city" style="width:400px"
+					required="true"
+					validatorMessage="City name should contain only alphabets">
+					<f:validateRegex pattern="[a-zA-Z]*" />
+				</p:inputText>
+				<p:message for="city" styleClass="error-message"/>
+				<br />
+				<p:outputLabel for="state" value="State:" />
+				<p:inputText value="#{student.state}" id="state" required="true"
+					style="width:400px"
+					validatorMessage="State name should contain only alphabets">
+					<f:validateRegex pattern="[a-zA-Z]*" />
+				</p:inputText>
+				<p:message for="state" styleClass="error-message"/>
+				<br />
+				
+				<p:outputLabel for="telephoneNumber" value="Telephone:" />
+				<p:inputMask id="telephoneNumber" value="#{student.telephoneNumber}"
+					mask="(999) 999-9999" required="true" style="width:400px" />
+				<p:message for="telephoneNumber" />
+				<br />
+				<p:outputLabel for="email" value="E-mail:" />
+				<p:inputText value="#{student.email}" id="email" style="width:400px"
+					required="true" requiredMessage="You must enter a valid email Id"
+					validatorMessage="Email address is not valid">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:message for="email" styleClass="error-message"/>
+				<br />
+				<p:outputLabel for="dateOfSurvey" value="Date of Survey:" />
+				<p:calendar id="dateOfSurvey" size="40" required="true"
+					navigator="true" pattern="MM/dd/yyyy"
+					binding="#{dateOfSurveyComponent}"
+					requiredMessage="You must choose a survey date"
+					value="#{student.dateOfSurvey}" effect="fold" />
+				<p:message for="dateOfSurvey" styleClass="error-message"/>
+				<br />
+				<p:outputLabel for="possibleStartDate"
+					value="Possible start date of semester:" />
+				<p:calendar id="possibleStartDate" size="40"
+					value="#{student.possibleStartDate}" pattern="MM/dd/yyyy"
+					required="true" effect="fold" navigator="true"
+					requiredMessage="You must choose a start date of the semester">
+					<f:validator validatorId="dateRangeValidator" />
+					<f:attribute name="dateOfSurveyComponent"
+						value="#{dateOfSurveyComponent}" />
+				</p:calendar>
+				<p:message for="possibleStartDate" styleClass="error-message"/>
+			</h:panelGrid>
+			<br />
+			<p>What do you like most about the campus?</p>
+			<p:selectManyCheckbox value="#{student.campusManyCheckbox}"
+				id="campusManyCheckbox">
+				<f:selectItem itemValue="Students" itemLabel="Students" />
+				<f:selectItem itemValue="Location" itemLabel="Location" />
+				<f:selectItem itemValue="Campus" itemLabel="Campus" />
+				<f:selectItem itemValue="Atmosphere" itemLabel="Atmosphere" />
+				<f:selectItem itemValue="DormRooms" itemLabel="Dorm Rooms" />
+				<f:selectItem itemValue="Sports" itemLabel="Sports" />
+			</p:selectManyCheckbox>
+			<br />
+			<p>How did you become interested in the university?</p>
+			<p:selectOneRadio value="#{student.interestSelectOneRadio}"
+				id="interestSelectOneRadio">
+				<f:selectItem itemValue="Friends" itemLabel="Friends" />
+				<f:selectItem itemValue="Television" itemLabel="Television" />
+				<f:selectItem itemValue="Internet" itemLabel="Internet" />
+				<f:selectItem itemValue="Other" itemLabel="Other" />
+			</p:selectOneRadio>
+			<br />
+			<p>What is the likelihood of you recommending this school to
+				other prospective students?</p>
+			<p:autoComplete id="likelihoodSelectOneMenu" dropdown="true"
+				value="#{student.likelihoodSelectOneMenu}"
+				completeMethod="#{student.completeText}" forceSelection="true"
+				minQueryLength="1" queryDelay="100"/>
+				<!-- <f:selectItem itemValue="VeryLikely" itemLabel="Very Likely" />
+			<f:selectItem itemValue="Likely" itemLabel="Likely" />
+			<f:selectItem itemValue="Unlikely" itemLabel="Unlikely" /> -->
+			
+			<br />
+			<p>
+				Please enter at least 10 numbers, from 1 through 100, separated by
+				commas.<br /> You will get a chance to win a free movie ticket.
+			</p>
+			<p:outputLabel for="raffle">Raffle:</p:outputLabel>
+			<p:inputText value="#{student.raffle}" id="raffle"
+				style="width:763px">
+				<f:validateRegex pattern="^[0-9]{1,3}( *, *[0-9]{1,3})*$" />
+			</p:inputText>
+			<br />
+			<p>Additional comments:</p>
+			<p:inputTextarea value="#{student.additionalComments}"
+				id="additionalComments" cols="100" rows="10" />
+			<br />
+			<h:panelGrid columns="4" style="height: 46px; width: 230px;">
+				<p:commandButton value="Submit" update="surveyPanel"
+					action="#{student.submit}" icon="ui-icon-check" />
+				<p:commandButton value="Cancel" action="#{student.home}" />
+				<p:commandButton value="Reset" action="#{student.reset}"/> <!-- UIViewRoot.resetValues -->
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

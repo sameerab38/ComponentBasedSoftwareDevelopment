@@ -1,0 +1,40 @@
+.error-message
+{
+	color:red;
+}
+
+.studentData-table
+{
+	border-collapse:collapse;
+	table-layout: fixed;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.studentData-table-header
+{
+	text-align:center;
+	background:none repeat scroll 0 0 #E5E5E5;
+	border-bottom:1px solid #BBBBBB;
+	padding:26px;
+	word-wrap: break-word;
+}
+
+.studentData-table-odd-row
+{
+	text-align:center;	
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid #BBBBBB;
+	word-wrap: break-word;
+}
+
+.studentData-table-even-row
+{
+	text-align:center;
+	background:none repeat scroll 0 0 #F9F9F9;
+	border-top:1px solid #BBBBBB;
+	word-wrap: break-word;
+}
+.ui-datatable tbody td.wrap {
+    white-space: normal;
+}

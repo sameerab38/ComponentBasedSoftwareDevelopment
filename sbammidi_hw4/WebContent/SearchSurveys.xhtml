@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Sameera Bammidi -->
+<!-- This page displays the searched surveys if nothing is entered into the search fields, nothing will be displayed.-->
+<!-- Also there is a delete link to delete the corresponding row from the database. -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/resources/css/style.css" />
+	<title>Surveys search</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<p:panel id="searchPanel" header="Search Form">
+
+			<p:messages id="msgs" />
+			<p>Please enter values in one or more of the below fields to
+				search</p>
+			<h:panelGrid columns="1" cellpadding="5">
+				<p:outputLabel for="firstName" value="First Name:" />
+				<p:inputText id="firstName" value="#{searchSurveys.firstName}">
+					<f:validateRegex pattern="[a-zA-Z]*" />
+				</p:inputText>
+				<br />
+				<p:outputLabel for="lastName" value="Last Name:" />
+				<p:inputText value="#{searchSurveys.lastName}" id="lastName">
+					<f:validateRegex pattern="[a-zA-Z]*" />
+				</p:inputText>
+				<br />
+				<p:outputLabel for="city" value="City:" />
+				<p:inputText value="#{searchSurveys.city}" id="city">
+					<f:validateRegex pattern="[a-zA-Z]*" />
+				</p:inputText>
+				<br />
+				<p:outputLabel for="state" value="State:" />
+				<p:inputText value="#{searchSurveys.state}" id="state">
+					<f:validateRegex pattern="[a-zA-Z]*" />
+				</p:inputText>
+				<br />
+			</h:panelGrid>
+			<p:commandButton value="Search" update="searchPanel"
+				action="#{searchSurveys.search}" icon="ui-icon-search">
+				<f:ajax  render="@form"/>
+			</p:commandButton>
+			<p:outputPanel id="wrapper">
+			<p:dataTable varStatus="rowVar" scrollable="true" id="searchtable"
+				value="#{searchSurveys.studentList}" var="searchedData"
+				styleClass="studentData-table"
+				headerClass="studentData-table-header"
+				rowClasses="studentData-table-odd-row,studentData-table-even-row">
+				<p:column width="100">
+					<!-- column header -->
+					<f:facet name="header">Id</f:facet>
+					<!-- row record -->
+					<!-- #{studentData.firstName} -->
+					<h:outputText value="#{searchedData.id}" escape="false" />
+				</p:column>
+
+				<p:column width="100">
+					<!-- column header -->
+					<f:facet name="header">First name</f:facet>
+					<!-- row record -->
+					<!-- #{searchedData.firstName} -->
+					<h:outputText value="#{searchedData.firstName}" escape="false" />
+				</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">Last Name</f:facet>
+					<!-- #{searchedData.lastName} -->
+					<h:outputText value="#{searchedData.lastName}" escape="false" />
+				</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">Street Address</f:facet>
+    				#{searchedData.streetAddress}
+    			</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">City</f:facet>
+    				#{searchedData.city}
+    			</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">State</f:facet>
+    				#{searchedData.state}
+    			</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">Zip</f:facet>
+    				#{searchedData.zip}
+    			</p:column>
+
+				<p:column width="150">
+					<f:facet name="header">Telephone number</f:facet>
+    				#{searchedData.telephoneNumber}
+    			</p:column>
+
+				<p:column width="150">
+					<f:facet name="header">E-mail</f:facet>
+					<h:outputText value="#{searchedData.email}" escape="false" />
+				</p:column>
+
+				<p:column width="200">
+					<f:facet name="header">Date of survey</f:facet>
+    				#{searchedData.dateOfSurvey}
+    			</p:column>
+
+				<p:column width="200">
+					<f:facet name="header">Semester start date</f:facet>
+    				#{searchedData.possibleStartDate}
+    			</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">Campus likes</f:facet>
+					<p:repeat value="#{searchedData.campusManyCheckbox}" var="s">		
+         				#{s}
+      					</p:repeat>
+				</p:column>
+
+				<p:column width="200">
+					<f:facet name="header">University interest</f:facet>
+    				#{searchedData.interestSelectOneRadio}
+    			</p:column>
+
+				<p:column width="250">
+					<f:facet name="header">Recommending likelihood</f:facet>
+    				#{searchedData.likelihoodSelectOneMenu}
+    			</p:column>
+
+				<p:column width="200" styleClass="wrap">
+					<f:facet name="header">Raffle numbers enterd</f:facet>
+					<h:outputText value="#{searchedData.raffle}" />
+				</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">Delete</f:facet>
+					<p:commandLink id="delete" value="Delete Record" action="#{searchSurveys.deleteLink}" update=":form:wrapper" ajax="true">
+					   <f:param name="idString" value="#{searchedData.id}" />
+					   <f:ajax  render="@form" />
+					</p:commandLink> 
+				</p:column>
+			</p:dataTable>
+			</p:outputPanel>
+			<p:commandButton value="Home" action="#{student.home}" />
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
