@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Sameera Bammidi -->
+<!-- This page displays the list of surveys -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>List all surveys</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:dataTable varStatus="rowVar"
+			value="#{allStudentData.allStudentData}" var="studentData"
+			styleClass="studentData-table" headerClass="studentData-table-header"
+			rowClasses="studentData-table-odd-row,studentData-table-even-row">
+
+			<h:column>
+				<!-- column header -->
+				<f:facet name="header">First name</f:facet>
+				<!-- row record -->
+    				#{studentData.firstName}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">Last Name</f:facet>
+    				#{studentData.lastName}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">Street Address</f:facet>
+    				#{studentData.streetAddress}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">City</f:facet>
+    				#{studentData.city}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">State</f:facet>
+    				#{studentData.state}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">Zip</f:facet>
+    				#{studentData.zip}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">Telephone number</f:facet>
+    				#{studentData.telephoneNumber}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">E-mail</f:facet>
+    				#{studentData.email}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">Date of Survey</f:facet>
+    				#{studentData.dateOfSurvey}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">Campus likes</f:facet>
+    				 <ui:repeat value="#{studentData.campusManyCheckbox}" var="s">		
+         				#{s}
+      					</ui:repeat>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">University interest</f:facet>
+    				#{studentData.interestSelectOneRadio}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">Recommending likelihood</f:facet>
+    				#{studentData.likelihoodSelectOneMenu}
+    			</h:column>
+
+			<h:column>
+				<f:facet name="header">Raffle numbers enterd</f:facet>
+    				#{studentData.raffle}
+    			</h:column>
+
+		</h:dataTable>
+		<h:commandButton value="Home" action="#{student.home}" />
+	</h:form>
+</h:body>
+</html>
