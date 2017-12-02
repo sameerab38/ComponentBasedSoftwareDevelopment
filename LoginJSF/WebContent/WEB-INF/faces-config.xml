@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+	<navigation-rule>
+		<display-name>Login.xhtml</display-name>
+		<from-view-id>/Login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/Success.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/Failure.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<display-name>Success.xhtml</display-name>
+		<from-view-id>/Success.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>Login</from-outcome>
+			<to-view-id>/Login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Failure.xhtml</display-name>
+		<from-view-id>/Failure.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>Login</from-outcome>
+			<to-view-id>/Login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>
+
