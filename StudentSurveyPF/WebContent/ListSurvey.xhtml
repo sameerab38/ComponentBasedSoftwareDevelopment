@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Sameera Bammidi -->
+<!-- This page displays the list of surveys -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<!-- <h:outputStylesheet library="css" name="table-style.css" /> -->
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/style.css" />
+	<title>List all surveys</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:panel id="listPanel" header="List of all Surveys">
+			<p:dataTable varStatus="rowVar" scrollable="true"
+				value="#{allStudentData.allStudentData}" var="sd"
+				styleClass="studentData-table"
+				headerClass="studentData-table-header"
+				rowClasses="studentData-table-odd-row,studentData-table-even-row">
+
+				<p:column width="100">
+					<!-- column header -->
+					<f:facet name="header">First name</f:facet>
+					<!-- row record -->
+					<!-- #{sd.firstName} -->
+					<h:outputText value="#{sd.firstName}" escape="false" />
+				</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">Last Name</f:facet>
+					<!-- #{sd.lastName} -->
+					<h:outputText value="#{sd.lastName}" escape="false" />
+				</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">Street Address</f:facet>
+    				#{sd.streetAddress}
+    			</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">City</f:facet>
+    				#{sd.city}
+    			</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">State</f:facet>
+    				#{sd.state}
+    			</p:column>
+
+				<p:column width="100">
+					<f:facet name="header">Zip</f:facet>
+    				#{sd.zip}
+    			</p:column>
+
+				<p:column width="150">
+					<f:facet name="header">Telephone number</f:facet>
+    				#{sd.telephoneNumber}
+    			</p:column>
+
+				<p:column width="150">
+					<f:facet name="header">E-mail</f:facet>
+					<h:outputText value="#{sd.email}" escape="false" />
+				</p:column>
+
+				<p:column width="200">
+					<f:facet name="header">Date of survey</f:facet>
+    				#{sd.dateOfSurvey}
+    			</p:column>
+
+				<p:column width="200">
+					<f:facet name="header">Semester start date</f:facet>
+    				#{sd.possibleStartDate}
+    			</p:column>
+				
+					<p:column width="100">
+						<f:facet name="header">Campus likes</f:facet>
+         				 <p:repeat value="#{sd.campusManyCheckbox}" var="s">		
+         				#{s}
+      					</p:repeat>
+					</p:column>
+
+				<p:column width="200">
+					<f:facet name="header">University interest</f:facet>
+    				#{sd.interestSelectOneRadio}
+    			</p:column>
+
+				<p:column width="250">
+					<f:facet name="header">Recommending likelihood</f:facet>
+    				#{sd.likelihoodSelectOneMenu}
+    			</p:column>
+
+				<p:column width="200" styleClass="wrap">
+					<f:facet name="header">Raffle numbers enterd</f:facet>
+					<!-- #{studentData.raffle} -->
+					<h:outputText value="#{sd.raffle}"/>
+				</p:column>
+
+			</p:dataTable>
+			<p:commandButton value="Home" action="#{student.home}" />
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
