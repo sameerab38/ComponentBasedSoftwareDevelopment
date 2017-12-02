@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://main.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://main.com" xmlns:intf="http://main.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://main.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getCollectionOfSearchStrings">
+    <complexType>
+     <sequence>
+      <element name="firstName" type="xsd:string"/>
+      <element name="lastName" type="xsd:string"/>
+      <element name="city" type="xsd:string"/>
+      <element name="state" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCollectionOfSearchStringsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getCollectionOfSearchStringsReturn" type="impl:StudentData"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="StudentData">
+    <sequence>
+     <element name="additionalComments" nillable="true" type="xsd:string"/>
+     <element name="campusManyCheckbox" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="dateOfSurvey" nillable="true" type="xsd:dateTime"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:long"/>
+     <element name="interestSelectOneRadio" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="likelihoodSelectOneMenu" nillable="true" type="xsd:string"/>
+     <element name="possibleStartDate" nillable="true" type="xsd:dateTime"/>
+     <element name="raffle" nillable="true" type="xsd:string"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="streetAddress" nillable="true" type="xsd:string"/>
+     <element name="telephoneNumber" nillable="true" type="xsd:string"/>
+     <element name="zip" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getCollectionOfSearchStringsRequest">
+
+      <wsdl:part element="impl:getCollectionOfSearchStrings" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCollectionOfSearchStringsResponse">
+
+      <wsdl:part element="impl:getCollectionOfSearchStringsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="SearchSOAPClass">
+
+      <wsdl:operation name="getCollectionOfSearchStrings">
+
+         <wsdl:input message="impl:getCollectionOfSearchStringsRequest" name="getCollectionOfSearchStringsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCollectionOfSearchStringsResponse" name="getCollectionOfSearchStringsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="SearchSOAPClassSoapBinding" type="impl:SearchSOAPClass">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getCollectionOfSearchStrings">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCollectionOfSearchStringsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCollectionOfSearchStringsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="SearchSOAPClassService">
+
+      <wsdl:port binding="impl:SearchSOAPClassSoapBinding" name="SearchSOAPClass">
+
+         <wsdlsoap:address location="http://localhost:8080/sbammidi_hw5/services/SearchSOAPClass"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
